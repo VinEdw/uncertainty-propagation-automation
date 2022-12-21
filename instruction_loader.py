@@ -1,5 +1,6 @@
 import json
 from jsonschema import validate
+from sympy.parsing.sympy_parser import parse_expr
 
 def open_json_instructions(file_name):
     """
@@ -12,13 +13,15 @@ def open_json_instructions(file_name):
         file_json = json.load(file)
     return file_json
 
-def validate_json_instructions(insturctions):
+def validate_json_instructions(instructions):
     """
     Check that the json instructions are valid structurally and semantically.
     Raise an error if it fails any of the checks.
     First check it against a json schema.
     Then perform the following other checks
-    - 
+    - All the lists of values have the same length
+    - All the symbols are unique and are valid identifiers
+    - All the uncertainty formulas do not reference symbols besides themselves
     """
     instruction_schema = {
         "type": "object",
@@ -73,5 +76,36 @@ def validate_json_instructions(insturctions):
             },
         }
     }
-    validate(insturctions, instruction_schema)
-
+    validate(instructions, instruction_schema)
+    
+    # Check all the lists of values have the same length
+    input_items = instructions["inputs"]
+    target_length = len(input_items[0]["value"])
+    for item in input_items:
+        item_length = len(item["value"])
+        if item_length != target_length:
+            raise ValueError("The value lists for the items in the 'inputs' section of the json instructions do not all have the same length")
+    
+    # Check all the symbols are unique and are valid identifiers
+    used_symbols = []
+    instruction_sections = ["constants","inputs", "outputs"]
+    for section in instruction_sections:
+        for item in instructions[section]:
+            symbol = item["symbol"]
+            if not symbol.isidentifier():
+                raise ValueError(f"The symbol '{symbol}' is not a valid identifier.")
+            if symbol not in used_symbols:
+                used_symbols.append(symbol)
+            else:
+                raise ValueError(f"The symbol '{symbol}' is used for more than one item.")
+    
+    # Check all the uncertainty formulas do not reference symbols besides themselves
+    for item in instructions["inputs"]:
+        symbol = item["symbol"]
+        uncertainty_formula = parse_expr(item["uncertainty"])
+        var_str_list = [str(var) for var in uncertainty_formula.free_symbols]
+        if len(var_str_list) == 1:
+            if symbol not in var_str_list:
+                raise ValueError(f"The uncertainty formula for '{symbol}' references a symbol besides itself.")
+        if len(var_str_list) > 1:
+            raise ValueError(f"The uncertainy formula for '{symbol}' references multiple symbols.")
