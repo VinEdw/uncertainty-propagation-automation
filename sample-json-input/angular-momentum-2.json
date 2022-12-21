@@ -1,0 +1,75 @@
+{
+    "constants": [
+        {
+            "symbol": "omega_error",
+            "value": 0.00386,
+            "uncertainty": 0,
+            "units": ""
+        },
+        {
+            "symbol": "I_b",
+            "value": 2.74961499200000,
+            "uncertainty": 0.00372338480048780,
+            "units": "g m^2"
+        },
+        {
+            "symbol": "I_t",
+            "value": 2.76796787150000,
+            "uncertainty": 0.00375155084230033,
+            "units": "g m^2"
+        }
+    ],
+    "inputs": [
+        {
+            "symbol": "omega_b",
+            "value": [
+                0,
+                4.878,
+                4.157
+            ],
+            "uncertainty": "abs(omega_error * omega_b)",
+            "units": "rad/s"
+        },
+        {
+            "symbol": "omega_t",
+            "value": [
+                6.652,
+                2.080,
+                -1.445
+            ],
+            "uncertainty": "abs(omega_error * omega_t)",
+            "units": "rad/s"
+        },
+        {
+            "symbol": "omega_f",
+            "value": [
+                3.324,
+                3.456,
+                1.41
+            ],
+            "uncertainty": "abs(omega_error * omega_f)",
+            "units": "rad/s"
+        }
+    ],
+    "outputs": [
+        {
+            "symbol": "L_i",
+            "value": "I_b * omega_b + I_t * omega_t",
+            "units": "g m^2/s"
+        },
+        {
+            "symbol": "L_f",
+            "value": "(I_b + I_t) * omega_f",
+            "units": "g m^2/s"
+        },
+        {
+            "symbol": "Delta_L",
+            "value": "L_f - L_i",
+            "units": "g m^2/s"
+        }
+    ],
+    "tables": [
+        ["omega_b", "omega_t", "omega_f"],
+        ["L_i", "L_f", "Delta_L"]
+    ]
+}

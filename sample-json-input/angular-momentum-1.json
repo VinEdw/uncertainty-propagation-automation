@@ -1,0 +1,43 @@
+{
+    "constants": [],
+    "inputs": [
+        {
+            "symbol": "M",
+            "value": [
+                1347.2,
+                1361.2,
+                465.8
+            ],
+            "uncertainty": "sqrt(0.05**2 + (0.0005 * M)**2)",
+            "units": "g"
+        },
+        {
+            "symbol": "D_i",
+            "value": [
+                15.8,
+                15.5,
+                15.7
+            ],
+            "uncertainty": "sqrt(0.05**2 + (0.0005 * D_i)**2)",
+            "units": "mm"
+        },
+        {
+            "symbol": "D_o",
+            "value": [
+                126.8,
+                126.6,
+                126.7
+            ],
+            "uncertainty": "sqrt(0.05**2 + (0.0005 * D_o)**2)",
+            "units": "mm"
+        }
+    ],
+    "outputs": [
+        {
+            "symbol": "I",
+            "value": "M / 8 * (D_i**2 + D_o**2) / 1000**2",
+            "units": "g m^2"
+        }
+    ],
+    "tables": []
+}
