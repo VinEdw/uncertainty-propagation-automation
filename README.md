@@ -31,7 +31,7 @@ Loosely, the structure is as follows.
         40,
         50
       ], // an array of numbers
-      "uncertainty": "sqrt (0.05**2 + (0.002 * h)**2)", // a formula to calculate the uncertainty for each value
+      "uncertainty": "sqrt (0.05**2 + (0.002 * h)**2)", // a formula to calculate the uncertainty
       "units": "cm" // a purely aesthetic string; the program does not check units
     }
     // More items can be added to the array as needed
@@ -39,7 +39,8 @@ Loosely, the structure is as follows.
   ],
   // outputs are the quantities calculated by the program
   // It propagates the uncertainty of the inputs in order to determine the uncertainty of the outputs
-  // Note that outputs should be listed in the order that they should be calculated in; If the formula for B relies on the value for A, then A should be listed first
+  // Note that outputs should be listed in the order that they should be calculated in
+  // e.g. If the formula for B relies on the value for A, then A should be listed first
   "outputs": [
     {
       "symbol": "t", // a valid identifier
