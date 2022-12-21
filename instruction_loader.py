@@ -78,7 +78,7 @@ def validate_json_instructions(instructions):
         }
     }
     validate(instructions, instruction_schema)
-    
+
     # Check all the lists of values have the same length
     input_items = instructions["inputs"]
     target_length = len(input_items[0]["value"])
@@ -86,7 +86,7 @@ def validate_json_instructions(instructions):
         item_length = len(item["value"])
         if item_length != target_length:
             raise ValueError("The value lists for the items in the 'inputs' section of the json instructions do not all have the same length")
-    
+
     # Check all the symbols are unique and are valid identifiers
     used_symbols = []
     instruction_sections = ["constants","inputs", "outputs"]
@@ -99,7 +99,7 @@ def validate_json_instructions(instructions):
                 used_symbols.append(symbol)
             else:
                 raise ValueError(f"The symbol '{symbol}' is used for more than one item.")
-    
+
     # Check all the uncertainty formulas do not reference symbols besides themselves
     for item in instructions["inputs"]:
         symbol = item["symbol"]
