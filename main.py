@@ -1,13 +1,7 @@
 import sys
 import math
-import json
+from instruction_loader import open_json_instructions
 from sympy.parsing.sympy_parser import parse_expr
-
-def load_data(file_name):
-    """Load in the input data."""
-    with open(file_name) as file:
-        file_json = json.load(file)
-    return file_json
 
 def validate_data(data):
     """Check that the structure of the json data is correct."""
@@ -240,7 +234,7 @@ if __name__ == "__main__":
         table_format = sys.argv[2]
     else:
         table_format = "markdown"
-    data = load_data(file_name)
+    data = open_json_instructions(file_name)
     
     # Validate the data structure; Stop if it is bad
     if not validate_data(data):
