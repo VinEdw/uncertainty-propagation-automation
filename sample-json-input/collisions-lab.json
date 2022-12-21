@@ -1,133 +1,148 @@
 {
-    "constants": [
-        {
-            "symbol": "g",
-            "value": 9.81,
-            "uncertainty": 0,
-            "units": "m/s^2"
-        },
-        {
-            "symbol": "v_error",
-            "value": 0.001772295692,
-            "uncertainty": 0,
-            "units": ""
-        }
+  "constants": [
+    {
+      "symbol": "g",
+      "value": 9.81,
+      "uncertainty": 0,
+      "units": "m/s^2"
+    },
+    {
+      "symbol": "v_error",
+      "value": 0.001772295692,
+      "uncertainty": 0,
+      "units": ""
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "m_B",
+      "value": [
+        599.3,
+        350.0,
+        350.0,
+        599.0,
+        349.8,
+        349.9
+      ],
+      "uncertainty": "sqrt(0.05**2 + (0.0005 * m_B)**2)",
+      "units": "g"
+    },
+    {
+      "symbol": "m_G",
+      "value": [
+        579.0,
+        1109.8,
+        1109.8,
+        579.1,
+        1098.0,
+        1097.9
+      ],
+      "uncertainty": "sqrt(0.05**2 + (0.0005 * m_G)**2)",
+      "units": "g"
+    },
+    {
+      "symbol": "v_B",
+      "value": [
+        -30.01,
+        -48.67,
+        -33.21,
+        -30.79,
+        0,
+        -28.50
+      ],
+      "uncertainty": "abs(v_error * v_B)",
+      "units": "cm/s"
+    },
+    {
+      "symbol": "v_G",
+      "value": [
+        22.91,
+        0,
+        18.94,
+        28.04,
+        42.67,
+        22.14
+      ],
+      "uncertainty": "abs(v_error * v_G)",
+      "units": "cm/s"
+    },
+    {
+      "symbol": "u_B",
+      "value": [
+        -2.374,
+        -10.03,
+        6.39,
+        19.26,
+        61.4,
+        45.19
+      ],
+      "uncertainty": "abs(v_error * u_B)",
+      "units": "cm/s"
+    },
+    {
+      "symbol": "u_G",
+      "value": [
+        -2.374,
+        -10.03,
+        6.389,
+        -27.56,
+        20.02,
+        -2.792
+      ],
+      "uncertainty": "abs(v_error * u_G)",
+      "units": "cm/s"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "P_i",
+      "value": "(m_B * v_B + m_G * v_G) / 100",
+      "units": "g m/s"
+    },
+    {
+      "symbol": "P_f",
+      "value": "(m_B * u_B + m_G * u_G) / 100",
+      "units": "g m/s"
+    },
+    {
+      "symbol": "Delta_P",
+      "value": "P_f - P_i",
+      "units": "g m/s"
+    },
+    {
+      "symbol": "K_i",
+      "value": "m_B * (v_B / 100)**2 / 2 + m_G * (v_G / 100)**2 / 2",
+      "units": "mJ"
+    },
+    {
+      "symbol": "K_f",
+      "value": "m_B * (u_B / 100)**2 / 2 + m_G * (u_G / 100)**2 / 2",
+      "units": "mJ"
+    },
+    {
+      "symbol": "Delta_K",
+      "value": "K_f - K_i",
+      "units": "mJ"
+    }
+  ],
+  "tables": [
+    [
+      "m_B",
+      "m_G",
+      "v_B",
+      "v_G",
+      "u_B",
+      "u_G"
     ],
-    "inputs": [
-        {
-            "symbol": "m_B",
-            "value": [
-                599.3,
-                350.0,
-                350.0,
-                599.0,
-                349.8,
-                349.9
-            ],
-            "uncertainty": "sqrt(0.05**2 + (0.0005 * m_B)**2)",
-            "units": "g"
-        },
-        {
-            "symbol": "m_G",
-            "value": [
-                579.0,
-                1109.8,
-                1109.8,
-                579.1,
-                1098.0,
-                1097.9
-            ],
-            "uncertainty": "sqrt(0.05**2 + (0.0005 * m_G)**2)",
-            "units": "g"
-        },
-        {
-            "symbol": "v_B",
-            "value": [
-                -30.01,
-                -48.67,
-                -33.21,
-                -30.79,
-                0,
-                -28.50
-            ],
-            "uncertainty": "abs(v_error * v_B)",
-            "units": "cm/s"
-        },
-        {
-            "symbol": "v_G",
-            "value": [
-                22.91,
-                0,
-                18.94,
-                28.04,
-                42.67,
-                22.14
-            ],
-            "uncertainty": "abs(v_error * v_G)",
-            "units": "cm/s"
-        },
-        {
-            "symbol": "u_B",
-            "value": [
-                -2.374,
-                -10.03,
-                6.39,
-                19.26,
-                61.4,
-                45.19
-            ],
-            "uncertainty": "abs(v_error * u_B)",
-            "units": "cm/s"
-        },
-        {
-            "symbol": "u_G",
-            "value": [
-                -2.374,
-                -10.03,
-                6.389,
-                -27.56,
-                20.02,
-                -2.792
-            ],
-            "uncertainty": "abs(v_error * u_G)",
-            "units": "cm/s"
-        }
+    [
+      "P_i",
+      "P_f",
+      "Delta_P"
     ],
-    "outputs": [
-        {
-            "symbol": "P_i",
-            "value": "(m_B * v_B + m_G * v_G) / 100",
-            "units": "g m/s"
-        },
-        {
-            "symbol": "P_f",
-            "value": "(m_B * u_B + m_G * u_G) / 100",
-            "units": "g m/s"
-        },
-        {
-            "symbol": "Delta_P",
-            "value": "P_f - P_i",
-            "units": "g m/s"
-        },
-        {
-            "symbol": "K_i",
-            "value": "m_B * (v_B / 100)**2 / 2 + m_G * (v_G / 100)**2 / 2",
-            "units": "mJ"
-        },
-        {
-            "symbol": "K_f",
-            "value": "m_B * (u_B / 100)**2 / 2 + m_G * (u_G / 100)**2 / 2",
-            "units": "mJ"
-        },
-        {
-            "symbol": "Delta_K",
-            "value": "K_f - K_i",
-            "units": "mJ"
-        }
-    ],
-    "tables": [
-        ["m_B", "m_G", "v_B", "v_G", "u_B", "u_G"],
-        ["P_i", "P_f", "Delta_P"],
-        ["K_i", "K_f", "Delta_K"]
+    [
+      "K_i",
+      "K_f",
+      "Delta_K"
     ]
+  ]
 }
