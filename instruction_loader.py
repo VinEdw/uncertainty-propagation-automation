@@ -36,7 +36,8 @@ def validate_json_instructions(instructions):
                         "value": {"type": "number"},
                         "uncertainty": {"type": "number"},
                         "units": {"type": "string"},
-                    }
+                    },
+                    "required": ["symbol", "value", "uncertainty", "units"],
                 }
             },
             "inputs": {
@@ -49,7 +50,8 @@ def validate_json_instructions(instructions):
                         "value": {"type": "array", "items": {"type": "number"}},
                         "uncertainty": {"type": "string"},
                         "units": {"type": "string"},
-                    }
+                    },
+                    "required": ["symbol", "value", "uncertainty", "units"],
                 }
             },
             "outputs": {
@@ -60,7 +62,8 @@ def validate_json_instructions(instructions):
                         "symbol": {"type": "string"},
                         "value": {"type": "string"},
                         "units": {"type": "string"},
-                    }
+                    },
+                    "required": ["symbol", "value", "units"],
                 }
             },
             "tables": {
@@ -72,7 +75,8 @@ def validate_json_instructions(instructions):
                     }
                 }
             },
-        }
+        },
+        "required": ["constants", "inputs", "outputs", "tables"],
     }
     validate(instructions, instruction_schema)
 
