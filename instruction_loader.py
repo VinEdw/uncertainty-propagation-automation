@@ -68,10 +68,7 @@ def validate_json_instructions(instructions):
                 "items": {
                     "type": "array",
                     "items": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                        }
+                        "type": "string",
                     }
                 }
             },
