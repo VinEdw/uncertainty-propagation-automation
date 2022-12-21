@@ -122,6 +122,6 @@ def load_instructions(file_name):
     
     Return the json instructions object.
     """
-    instructions = load_instructions(file_name)
+    instructions = open_json_instructions(file_name)
     validate_json_instructions(instructions)
     return instructions
