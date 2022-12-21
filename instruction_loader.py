@@ -2,13 +2,9 @@ import json
 from jsonschema import validate
 from sympy.parsing.sympy_parser import parse_expr
 
-def open_json_instructions(file_name):
+def open_json(file_name):
     """
-    Open the file at the location `file_name`.
-    This should be a .json file with the instructions for what to calculate.
-    This includes the symbols, values, uncertainty, and units for the constants ("constants") and raw data ("inputs").
-    It also includes the symbols, formulas, and units for the calculated quantities ("outputs"),
-    Lastly, it optionally includes information on what tables to print out ("tables").
+    Open the json file at the location `file_name`.
     """
     with open(file_name) as file:
         file_json = json.load(file)
@@ -121,6 +117,6 @@ def load_instructions(file_name):
     
     Return the json instructions object.
     """
-    instructions = open_json_instructions(file_name)
+    instructions = open_json(file_name)
     validate_json_instructions(instructions)
     return instructions
