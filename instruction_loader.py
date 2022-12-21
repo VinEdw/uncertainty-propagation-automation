@@ -8,6 +8,7 @@ def open_json_instructions(file_name):
     This should be a .json file with the instructions for what to calculate.
     This includes the symbols, values, uncertainty, and units for the constants ("constants") and raw data ("inputs").
     It also includes the symbols, formulas, and units for the calculated quantities ("outputs"),
+    Lastly, it optionally includes information on what tables to print out ("tables").
     """
     with open(file_name) as file:
         file_json = json.load(file)
@@ -109,3 +110,18 @@ def validate_json_instructions(instructions):
                 raise ValueError(f"The uncertainty formula for '{symbol}' references a symbol besides itself.")
         if len(var_str_list) > 1:
             raise ValueError(f"The uncertainy formula for '{symbol}' references multiple symbols.")
+
+def load_instructions(file_name):
+    """
+    Load the json instructions for what to calculate.
+    This includes the symbols, values, uncertainty, and units for the constants ("constants") and raw data ("inputs").
+    It also includes the symbols, formulas, and units for the calculated quantities ("outputs"),
+    Lastly, it optionally includes information on what tables to print out ("tables").
+    
+    Validate that the json file is structurally and semantically sound.
+    
+    Return the json instructions object.
+    """
+    instructions = load_instructions(file_name)
+    validate_json_instructions(instructions)
+    return instructions
