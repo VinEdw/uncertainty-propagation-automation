@@ -22,7 +22,7 @@ def validate_json_instructions(instructions):
     Then perform the following other checks
     - All the lists of values have the same length
     - All the symbols are unique and are valid identifiers
-    - All the uncertainty formulas do not reference symbols besides themselves
+    - All the uncertainty formulas do not reference non constant symbols besides themselves
     """
     instruction_schema = {
         "type": "object",
@@ -97,16 +97,14 @@ def validate_json_instructions(instructions):
             else:
                 raise ValueError(f"The symbol '{symbol}' is used for more than one item.")
 
-    # Check all the uncertainty formulas do not reference symbols besides themselves
+    # Check all the uncertainty formulas do not reference non constant symbols besides themselves
+    constant_symbol_list = [item["symbol"] for item in instructions["constants"]]
     for item in instructions["inputs"]:
         symbol = item["symbol"]
         uncertainty_formula = parse_expr(item["uncertainty"])
-        var_str_list = [str(var) for var in uncertainty_formula.free_symbols]
-        if len(var_str_list) == 1:
-            if symbol not in var_str_list:
-                raise ValueError(f"The uncertainty formula for '{symbol}' references a symbol besides itself.")
-        if len(var_str_list) > 1:
-            raise ValueError(f"The uncertainy formula for '{symbol}' references multiple symbols.")
+        for var in uncertainty_formula.free_symbols:
+            if str(var) not in (constant_symbol_list + [symbol]):
+                raise ValueError(f"The uncertainty formula for '{symbol}' references a non constant symbol besides itself.")
 
 def load_instructions(file_name):
     """
