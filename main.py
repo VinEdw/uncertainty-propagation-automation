@@ -1,35 +1,7 @@
 import sys
 import math
-import json
+from instruction_loader import load_instructions
 from sympy.parsing.sympy_parser import parse_expr
-
-def load_data(file_name):
-    """Load in the input data."""
-    with open(file_name) as file:
-        file_json = json.load(file)
-    return file_json
-
-def validate_data(data):
-    """Check that the structure of the json data is correct."""
-    # Check that all the manually entered lists of values have the same lengths
-    # It is assumed that there is at least one input symbol
-    inputs = data["inputs"]
-    target_length = len(inputs[0]["value"])
-    for item in inputs:
-        current_length = len(item["value"])
-        if current_length != target_length:
-            return False
-    # Check that all the symbols are unique
-    symbol_set = set()
-    symbol_count = 0
-    for item in data["constants"] + data["inputs"] + data["outputs"]:
-        symbol_count += 1
-        symbol_set.add(item["symbol"])
-    if symbol_count != len(symbol_set):
-        return False
-    # If all checks pass, return True
-    # Note: More checks can be added in the future if desired
-    return True
 
 def calculate_input_uncertainty(data):
     """Calculate the uncertainty for each value in the input section of the json data."""
@@ -234,30 +206,26 @@ def print_latex_table(data, columns):
 
 
 if __name__ == "__main__":
-    # Open the input file name and load the data
+    # Open the input file name and load the instructions
     file_name = sys.argv[1]
     if len(sys.argv) == 3:
         table_format = sys.argv[2]
     else:
         table_format = "markdown"
-    data = load_data(file_name)
     
-    # Validate the data structure; Stop if it is bad
-    if not validate_data(data):
-        print("Invalid input")
-        quit()
+    instructions = load_instructions(file_name)
     
-    calculate_input_uncertainty(data)
-    calculate_output(data)
+    calculate_input_uncertainty(instructions)
+    calculate_output(instructions)
     
-    desired_tables = data.get("tables", None)
+    desired_tables = instructions.get("tables", None)
     if desired_tables == None or len(desired_tables) == 0:
         desired_tables = [None]
     for column_list in desired_tables:
         if table_format == "markdown":
-            pretty_str = pretty_print_data(data, column_list)
+            pretty_str = pretty_print_data(instructions, column_list)
             print(pretty_str)
         elif table_format == "latex":
-            latex_str = print_latex_table(data, column_list)
+            latex_str = print_latex_table(instructions, column_list)
             print(latex_str)
         print()
