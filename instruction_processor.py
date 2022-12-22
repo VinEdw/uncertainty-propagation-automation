@@ -6,5 +6,5 @@ def process_instructions(instructions):
     "instructions" is the processed json input file.
     Note that the instructions object will be mutated in the process.
     
-    Tasks include calculating the uncertainty for each input item, and calculating the value & uncertainty for each output item.
+    Tasks include calculating the uncertainty for each input item, and calculating the values & uncertainty for each output item.
     """
