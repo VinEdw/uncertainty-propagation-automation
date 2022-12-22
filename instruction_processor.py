@@ -1,5 +1,16 @@
 from sympy.parsing.sympy_parser import parse_expr
 
+def get_item(instructions, symbol):
+    """
+    Return the item with the given symbol from the instructions object.
+    """
+    instruction_sections = ["constants","inputs", "outputs"]
+    for section in instruction_sections:
+        for item in instructions[section]:
+            if symbol == item["symbol"]:
+                return item
+    raise KeyError(f"Symbol '{symbol}' not in instructions object.")
+
 def process_instructions(instructions):
     """
     Process the calculation instructions.
