@@ -4,7 +4,7 @@ def get_item(instructions, symbol):
     """
     Return the item with the given symbol from the instructions object.
     """
-    instruction_sections = ["constants","inputs", "outputs"]
+    instruction_sections = ["constants", "inputs", "outputs"]
     for section in instruction_sections:
         for item in instructions[section]:
             if symbol == item["symbol"]:
