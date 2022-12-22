@@ -25,6 +25,7 @@ def get_substitutions(instructions, formula, row):
         else:
             value = value_attr
         substitutions[symbol] = value
+    return substitutions
 
 def process_instructions(instructions):
     """
