@@ -1,5 +1,4 @@
 import sys
-import math
 from instruction_loader import load_instructions
 from instruction_processor import process_instructions
 from result_printer import print_results
