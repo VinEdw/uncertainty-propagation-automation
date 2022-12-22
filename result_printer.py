@@ -38,6 +38,16 @@ def get_measurement_str(value, uncertainty, separator="±"):
         rounded_value = round(value, -uncertainty_pv)
     return f"{rounded_value} {separator} {uncertainty}"
 
+def ljust_column(column):
+    """
+    Left justify the given list of strings to all have the same length.
+    They will all share their maximum length.
+    Return a new list of the modified strings.
+    """
+    max_length = max(len(cell) for cell in column)
+    new_column = [cell.ljust(max_length) for cell in column]
+    return new_column
+
 def item_to_column(item, header_format="{symbol} ({units})", separator="±", bar_after_header=True):
     """
     Convert the information for the given item into a list of strings representing the data it contains.
@@ -54,9 +64,9 @@ def item_to_column(item, header_format="{symbol} ({units})", separator="±", bar
     for value, uncertainty in zip(item["value"], item["uncertainty"]):
         measurement_str = get_measurement_str(value, uncertainty, separator)
         column.append(measurement_str)
-    max_length = max(len(cell) for cell in column)
-    column = [cell.ljust(max_length) for cell in column]
+    column = ljust_column(column)
     if bar_after_header:
+        max_length = len(column[0])
         bar = "-" * max_length
         column.insert(1, bar)
     return column
