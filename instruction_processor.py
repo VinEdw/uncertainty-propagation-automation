@@ -42,6 +42,31 @@ def get_substitutions(instructions, formula, row):
         substitutions[symbol] = value
     return substitutions
 
+def get_constant_uncertainty_substitutions(instructions):
+    """
+    Return an uncertainty substitutions dictionary for all the constants.
+    """
+    substitutions = {}
+    for item in instructions["constants"]:
+        symbol = item["symbol"]
+        uncertainty = item["uncertainty"]
+        substitutions[symbol] = uncertainty
+    return substitutions
+
+def get_uncertainty_substitutions(instructions, formula, row):
+    """
+    Return an uncertainty substitutions dictionary for the given formula at the given row.
+    """
+    substitutions = get_constant_uncertainty_substitutions(instructions)
+    for var in formula.free_symbols:
+        symbol = str(var)
+        if symbol in substitutions:
+            continue
+        item = get_item(instructions, symbol)
+        uncertainty = item["uncertainty"][row]
+        substitutions[symbol] = uncertainty
+    return substitutions
+
 def calculate_input_uncertainty(instructions, item):
     """
     Calculate the uncertainty for each of the given input item's values.
@@ -57,14 +82,14 @@ def calculate_input_uncertainty(instructions, item):
         uncertainty_list.append(uncertainty)
     item["uncertainty"] = uncertainty_list
 
-def propagate_uncertainty(instructions, formula, substitutions, row):
+def propagate_uncertainty(formula, substitutions, uncertainty_substitutions):
     """
     For the given formula and substitutions, progagate the uncertainty and return it.
     """
     error_contributions = []
     for x in formula.free_symbols:
         partial_x = formula.diff(x).evalf(subs=substitutions) # Take the partial derivative of the formula with respect to the variable; evaluate it
-        delta_x = get_item(instructions, str(x))["uncertainty"][row] # Fetch the variable's uncertainty
+        delta_x = uncertainty_substitutions[str(x)] # Fetch the variable's uncertainty
         error_x = partial_x * delta_x # Multiply the partial derivative and the variable's uncertainty
         error_x_squared = error_x **2 # Square it
         error_contributions.append(error_x_squared) # Put the squared error in the list
@@ -81,8 +106,9 @@ def calculate_output_values_and_uncertainty(instructions, item):
     uncertainty_list = []
     for i in range(get_row_count(instructions)):
         substitutions = get_substitutions(instructions, formula, i)
+        uncertainty_substitutions = get_uncertainty_substitutions(instructions, formula, i)
         value = formula.evalf(subs=substitutions)
-        uncertainty = propagate_uncertainty(instructions, formula, substitutions, i)
+        uncertainty = propagate_uncertainty(formula, substitutions, uncertainty_substitutions)
         value_list.append(value)
         uncertainty_list.append(uncertainty)
     item["value"] = value_list
