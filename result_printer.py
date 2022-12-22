@@ -60,6 +60,23 @@ def item_to_column(item, header_format="{symbol} ({units})", separator="±", bar
         bar = "-" * max_length
         column.insert(1, bar)
     return column
+
+def get_item_list(instructions, symbols=None):
+    """
+    Return the items specified by the given symbols in a list.
+    If items=None, return a list of all the input and output items.
+    """
+    item_list = []
+    if symbols == None:
+        sections = ["inputs", "outputs"]
+        for section in sections:
+            for item in instructions[section]:
+                item_list.append(item)
+    else:
+        for symbol in symbols:
+            item = get_item(instructions, symbol)
+            item_list.append(item)
+    return item_list
         
 
 def print_results(instructions, table_format):
