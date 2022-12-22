@@ -11,19 +11,28 @@ def get_item(instructions, symbol):
                 return item
     raise KeyError(f"Symbol '{symbol}' not in instructions object.")
 
+def get_constant_substitutions(instructions):
+    """
+    Return a substitutions dictionary for all the constants.
+    """
+    substitutions = {}
+    for item in instructions["constants"]:
+        symbol = item["symbol"]
+        value = item["value"]
+        substitutions[symbol] = value
+    return substitutions
+
 def get_substitutions(instructions, formula, row):
     """
     Return a substitutions dictionary for the given formula at the given row.
     """
-    substitutions = {}
+    substitutions = get_constant_substitutions(instructions)
     for var in formula.free_symbols:
         symbol = str(var)
+        if symbol in substitutions:
+            continue
         item = get_item(instructions, symbol)
-        value_attr = item["value"]
-        if type(value_attr) == list:
-            value = value_attr[row]
-        else:
-            value = value_attr
+        value = item["value"][row]
         substitutions[symbol] = value
     return substitutions
 
