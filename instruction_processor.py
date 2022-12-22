@@ -11,6 +11,21 @@ def get_item(instructions, symbol):
                 return item
     raise KeyError(f"Symbol '{symbol}' not in instructions object.")
 
+def get_substitutions(instructions, formula, row):
+    """
+    Return a substitutions dictionary for the given formula at the given row.
+    """
+    substitutions = {}
+    for var in formula.free_symbols:
+        symbol = str(var)
+        item = get_item(instructions, symbol)
+        value_attr = item["value"]
+        if type(value_attr) == list:
+            value = value_attr[row]
+        else:
+            value = value_attr
+        substitutions[symbol] = value
+
 def process_instructions(instructions):
     """
     Process the calculation instructions.
