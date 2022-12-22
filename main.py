@@ -1,89 +1,7 @@
 import sys
 import math
 from instruction_loader import load_instructions
-from sympy.parsing.sympy_parser import parse_expr
-
-def calculate_input_uncertainty(data):
-    """Calculate the uncertainty for each value in the input section of the json data."""
-    # The uncertainty for each item/quantity in the input section of the json data is given as a formula
-    # This formula gets turned into list of specific uncertainty values, one for each measured value
-    for item in data["inputs"]:
-        # Grab the needed info from the json data on the current quantity
-        symbol = item["symbol"]
-        value_list = item["value"]
-        uncertainty_formula = parse_expr(item["uncertainty"]) # Parse the formula
-        uncertainty_list = []
-        for value in value_list:
-            # Use the constants and the current measured value as substitutions when evaluating the uncertainty
-            substitutions = {item["symbol"]:item["value"] for item in data["constants"]}
-            substitutions[symbol] = value
-            uncertainty = uncertainty_formula.evalf(subs=substitutions)
-            uncertainty_list.append(uncertainty)
-        item["uncertainty"] = uncertainty_list
-
-def get_row_data(data, row):
-    """Get the values and uncertainties for a single row of data."""
-    row_data = {}
-    # Grab the stuff in the constants section
-    for item in data["constants"]:
-        symbol = item["symbol"]
-        row_data[symbol] = {
-            "value": item["value"],
-            "uncertainty": item["uncertainty"],
-            # "units": item["units"]
-        }
-    # Grab the stuff in the inputs section at the given row
-    for item in data["inputs"]:
-        symbol = item["symbol"]
-        row_data[symbol] = {
-            "value": item["value"][row],
-            "uncertainty": item["uncertainty"][row],
-            # "units": item["units"]
-        }
-    # Grab the data in the outputs section at the given row (but only if it has been evaluated already)
-    for item in data["outputs"]:
-        symbol = item["symbol"]
-        # Skip this quantity if its value is still a formula string
-        if type(item["value"]) == str:
-           continue 
-        row_data[symbol] = {
-            "value": item["value"][row],
-            "uncertainty": item["uncertainty"][row],
-            # "units": item["units"]
-        }
-    return row_data
-
-def get_row_substitutions(row_data):
-    """Create a substitution dictionary based on the row data."""
-    return {key:data["value"] for key, data in row_data.items()}
-
-def calculate_output(data):
-    """Calculate the value and uncertainty for each of the quantities in the output section of the json data."""
-    row_count = len(data["inputs"][0]["value"])
-    # Iterate through each of the output quantities
-    for item in data["outputs"]:
-        formula = parse_expr(item["value"])
-        var_set = formula.free_symbols
-        value_list = []
-        uncertainty_list = []
-        # Iterate through each row
-        for i in range(row_count):
-            row_data = get_row_data(data, i)
-            row_substitutions = get_row_substitutions(row_data)
-            error_contributions = []
-            # Iterate through each variable in the formula used to calculate the quantities value
-            for x in var_set:
-                partial_x = formula.diff(x).evalf(subs=row_substitutions) # Take the partial derivative of the formula with respect to the variable; evaluate it
-                delta_x = row_data[str(x)]["uncertainty"] # Fetch the variable's uncertainty
-                error_x = partial_x * delta_x # Multiply the partial derivative and the variable's uncertainty
-                error_x_squared = error_x **2 # Square it
-                error_contributions.append(error_x_squared) # Put the squared error in the list
-            value = formula.evalf(subs=row_substitutions)
-            uncertainty = sum(error_contributions)**0.5 # The uncertainty is each of the uncertainty contributions added in quadrature
-            value_list.append(value)
-            uncertainty_list.append(uncertainty)
-        item["value"] = value_list
-        item["uncertainty"] = uncertainty_list
+from instruction_processor import process_instructions
 
 def get_leading_place_value(value):
     """Get the leading place value of the input number."""
@@ -214,10 +132,8 @@ if __name__ == "__main__":
         table_format = "markdown"
     
     instructions = load_instructions(file_name)
-    
-    calculate_input_uncertainty(instructions)
-    calculate_output(instructions)
-    
+    process_instructions(instructions)
+
     desired_tables = instructions.get("tables", None)
     if desired_tables == None or len(desired_tables) == 0:
         desired_tables = [None]

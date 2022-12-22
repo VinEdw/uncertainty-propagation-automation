@@ -57,14 +57,14 @@ def calculate_input_uncertainty(instructions, item):
         uncertainty_list.append(uncertainty)
     item["uncertainty"] = uncertainty_list
 
-def propagate_uncertainty(instructions, formula, substitutions):
+def propagate_uncertainty(instructions, formula, substitutions, row):
     """
     For the given formula and substitutions, progagate the uncertainty and return it.
     """
     error_contributions = []
     for x in formula.free_symbols:
         partial_x = formula.diff(x).evalf(subs=substitutions) # Take the partial derivative of the formula with respect to the variable; evaluate it
-        delta_x = get_item(instructions, str(x))["uncertainty"] # Fetch the variable's uncertainty
+        delta_x = get_item(instructions, str(x))["uncertainty"][row] # Fetch the variable's uncertainty
         error_x = partial_x * delta_x # Multiply the partial derivative and the variable's uncertainty
         error_x_squared = error_x **2 # Square it
         error_contributions.append(error_x_squared) # Put the squared error in the list
@@ -76,13 +76,13 @@ def calculate_output_values_and_uncertainty(instructions, item):
     Calculate the values and uncertainty for the output item.
     Note that the item object will be mutated in the process.
     """
-    formula = item["value"]
+    formula = parse_expr(item["value"])
     value_list = []
     uncertainty_list = []
     for i in range(get_row_count(instructions)):
         substitutions = get_substitutions(instructions, formula, i)
         value = formula.evalf(subs=substitutions)
-        uncertainty = propagate_uncertainty(instructions, formula, substitutions)
+        uncertainty = propagate_uncertainty(instructions, formula, substitutions, i)
         value_list.append(value)
         uncertainty_list.append(uncertainty)
     item["value"] = value_list
@@ -96,3 +96,7 @@ def process_instructions(instructions):
     
     Tasks include calculating the uncertainty for each input item, and calculating the values & uncertainty for each output item.
     """
+    for item in instructions["inputs"]:
+        calculate_input_uncertainty(instructions, item)
+    for item in instructions["outputs"]:
+        calculate_output_values_and_uncertainty(instructions, item)
