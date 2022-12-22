@@ -1,4 +1,5 @@
 import math
+from instruction_processor import get_item
 
 def get_leading_place_value(value):
     """Get the leading place value of the input number."""
@@ -36,6 +37,30 @@ def get_measurement_str(value, uncertainty, separator="±"):
         uncertainty_pv = get_leading_place_value(rounded_uncertainty)
         rounded_value = round(value, -uncertainty_pv)
     return f"{rounded_value} {separator} {uncertainty}"
+
+def item_to_column(item, header_format="{symbol} ({units})", separator="±", bar_after_header=True):
+    """
+    Convert the information for the given item into a list of strings representing the data it contains.
+    These strings will all be left justified to the same length.
+    Each value-uncertainty pair will be turned into a string using get_measurement_str() ('separator' can be specified).
+    The header will be formated with the specified format string ('symbol' and 'units' will be used as replacements).
+    Optionally, a bar of hyphens like "----" can be placed after the header.
+    """
+    column = []
+    symbol = item["symbol"]
+    units = item["units"]
+    header = header_format.format(symbol=symbol, units=units)
+    column.append(header)
+    for value, uncertainty in zip(item["value"], item["uncertainty"]):
+        measurement_str = get_measurement_str(value, uncertainty, separator)
+        column.append(measurement_str)
+    max_length = max(len(cell) for cell in column)
+    column = [cell.ljust(max_length) for cell in column]
+    if bar_after_header:
+        bar = "-" * max_length
+        column.insert(1, bar)
+    return column
+        
 
 def print_results(instructions, table_format):
     """
