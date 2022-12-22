@@ -7,7 +7,7 @@ If $f(x_1, x_2, \ldots, x_n, \ldots, x_N)$ is a scalar valued function of $N$ pa
 $$\Delta f = \sqrt{
 \left( \frac{\partial f}{\partial x_1} \Delta x_1 \right)^2 +
 \left( \frac{\partial f}{\partial x_2} \Delta x_2 \right)^2 + \ldots
-\left( \frac{\partial f}{\partial x_n} \Delta x_n \right)^2 + \ldots
+\left( \frac{\partial f}{\partial x_n} \Delta x_n \right)^2 \ldots +
 \left( \frac{\partial f}{\partial x_N} \Delta x_N \right)^2
 }
 $$
