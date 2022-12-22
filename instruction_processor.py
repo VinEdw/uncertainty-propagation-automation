@@ -1,5 +1,11 @@
 from sympy.parsing.sympy_parser import parse_expr
 
+def get_row_count(instructions):
+    """
+    Looking at the instructions object, get the number of rows for each input and output.
+    """
+    return len(instructions["inputs"][0]["value"])
+
 def get_item(instructions, symbol):
     """
     Return the item with the given symbol from the instructions object.
