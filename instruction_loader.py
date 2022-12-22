@@ -86,7 +86,7 @@ def validate_json_instructions(instructions):
 
     # Check all the symbols are unique and are valid identifiers
     used_symbols = []
-    instruction_sections = ["constants","inputs", "outputs"]
+    instruction_sections = ["constants", "inputs", "outputs"]
     for section in instruction_sections:
         for item in instructions[section]:
             symbol = item["symbol"]
