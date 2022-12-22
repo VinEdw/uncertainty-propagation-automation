@@ -4,7 +4,7 @@ def get_item(instructions, symbol):
     """
     Return the item with the given symbol from the instructions object.
     """
-    instruction_sections = ["constants", "inputs", "outputs"]
+    instruction_sections = ["inputs", "outputs", "constants"]
     for section in instruction_sections:
         for item in instructions[section]:
             if symbol == item["symbol"]:
@@ -35,6 +35,21 @@ def get_substitutions(instructions, formula, row):
         value = item["value"][row]
         substitutions[symbol] = value
     return substitutions
+
+def calculate_input_uncertainty(instructions, item):
+    """
+    Calculate the uncertainty for each of the given input item's values.
+    Note that the item object will be mutated in the process.
+    """
+    symbol = item["symbol"]
+    uncertainty_formula = parse_expr(item["uncertainty"])
+    uncertainty_list = []
+    substitutions = get_constant_substitutions(instructions)
+    for value in item["value"]:
+        substitutions[symbol] = value
+        uncertainty = uncertainty_formula.evalf(subs=substitutions)
+        uncertainty_list.append(uncertainty)
+    item["uncertainty"] = uncertainty_list
 
 def process_instructions(instructions):
     """
