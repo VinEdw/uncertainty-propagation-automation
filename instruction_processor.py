@@ -57,6 +57,20 @@ def calculate_input_uncertainty(instructions, item):
         uncertainty_list.append(uncertainty)
     item["uncertainty"] = uncertainty_list
 
+def propagate_uncertainty(instructions, formula, substitutions):
+    """
+    For the given formula and substitutions, progagate the uncertainty and return it.
+    """
+    error_contributions = []
+    for x in formula.free_symbols:
+        partial_x = formula.diff(x).evalf(subs=substitutions) # Take the partial derivative of the formula with respect to the variable; evaluate it
+        delta_x = get_item(instructions, str(x))["uncertainty"] # Fetch the variable's uncertainty
+        error_x = partial_x * delta_x # Multiply the partial derivative and the variable's uncertainty
+        error_x_squared = error_x **2 # Square it
+        error_contributions.append(error_x_squared) # Put the squared error in the list
+    uncertainty = sum(error_contributions)**0.5 # The full uncertainty is each of the uncertainty contributions added in quadrature
+    return uncertainty
+
 def calculate_output_values_and_uncertainty(instructions, item):
     """
     Calculate the values and uncertainty for the output item.
@@ -67,16 +81,8 @@ def calculate_output_values_and_uncertainty(instructions, item):
     uncertainty_list = []
     for i in range(get_row_count(instructions)):
         substitutions = get_substitutions(instructions, formula, i)
-        error_contributions = []
-        # Iterate through each variable in the formula used to calculate the quantities value
-        for x in formula.free_symbols:
-            partial_x = formula.diff(x).evalf(subs=substitutions) # Take the partial derivative of the formula with respect to the variable; evaluate it
-            delta_x = get_item(str(x))["uncertainty"] # Fetch the variable's uncertainty
-            error_x = partial_x * delta_x # Multiply the partial derivative and the variable's uncertainty
-            error_x_squared = error_x **2 # Square it
-            error_contributions.append(error_x_squared) # Put the squared error in the list
         value = formula.evalf(subs=substitutions)
-        uncertainty = sum(error_contributions)**0.5 # The full uncertainty is each of the uncertainty contributions added in quadrature
+        uncertainty = propagate_uncertainty(instructions, formula, substitutions)
         value_list.append(value)
         uncertainty_list.append(uncertainty)
     item["value"] = value_list
