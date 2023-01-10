@@ -2,13 +2,10 @@
 
 The goal of this project is to help automate calculations that require uncertainty propagation.
 
-If $f(x_1, x_2, \ldots, x_n, \ldots, x_N)$ is a scalar valued function of $N$ parameters, then its uncertainty, $\Delta f$, is calculated with the following formula, where each $\Delta x_n$ is the uncertainty in that parameter.
+If $f(x_1, x_2, \ldots, x_N)$ is a scalar valued function of $N$ parameters, then its uncertainty, $\Delta f$, is calculated with the following formula, where each $\Delta x_n$ is the uncertainty in that parameter.
 
 $$\Delta f = \sqrt{
-\left( \frac{\partial f}{\partial x_1} \Delta x_1 \right)^2 +
-\left( \frac{\partial f}{\partial x_2} \Delta x_2 \right)^2 + \ldots
-\left( \frac{\partial f}{\partial x_n} \Delta x_n \right)^2 \ldots +
-\left( \frac{\partial f}{\partial x_N} \Delta x_N \right)^2
+\sum_{n=1}^{N} \left( \frac{\partial f}{\partial x_n} \Delta x_n \right)^2
 }
 $$
 
