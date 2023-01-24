@@ -1,0 +1,46 @@
+{
+  "constants": [
+    {
+      "symbol": "g",
+      "value": 9.81,
+      "uncertainty": 0,
+      "units": "m/s^2"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "m",
+      "value": [
+        9.0
+      ],
+      "uncertainty": "sqrt(0.05**2 + (0.0005 * m)**2)",
+      "units": "g"
+    },
+    {
+      "symbol": "h",
+      "value": [
+        25
+      ],
+      "uncertainty": "sqrt (0.05**2 + (0.002 * h)**2)",
+      "units": "cm"
+    },
+    {
+      "symbol": "x",
+      "value": [
+        2
+      ],
+      "uncertainty": "sqrt (0.05**2 + (0.002 * x)**2)",
+      "units": "cm"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "k",
+      "value": "2*m*g*h/x**2 / 10",
+      "units": "N/m"
+    }
+  ],
+  "tables": [
+    ["m", "h", "x", "k"]
+  ]
+}
