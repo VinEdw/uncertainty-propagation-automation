@@ -101,7 +101,14 @@
     },
     {
       "symbol": "P_f",
-      "value": "(m_B * u_B + m_G * u_G) / 100",
+      "value": [
+        "(m_B + m_G) * u_B / 100",
+        "(m_B + m_G) * u_B / 100",
+        "(m_B + m_G) * u_B / 100",
+        "(m_B * u_B + m_G * u_G) / 100",
+        "(m_B * u_B + m_G * u_G) / 100",
+        "(m_B * u_B + m_G * u_G) / 100"
+      ],
       "units": "g m/s"
     },
     {
