@@ -56,7 +56,10 @@ def validate_json_instructions(instructions):
                     "type": "object",
                     "properties": {
                         "symbol": {"type": "string"},
-                        "value": {"type": "string"},
+                        "value": {
+                            "type": ["string", "array"],
+                            "items": {"type": "string"}
+                        },
                         "units": {"type": "string"},
                     },
                     "required": ["symbol", "value", "units"],
