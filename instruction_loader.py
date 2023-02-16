@@ -81,11 +81,12 @@ def validate_json_instructions(instructions):
 
     # Check all the lists of values have the same length
     input_items = instructions["inputs"]
+    output_items = [item for item in instructions["outputs"] if type(item["value"]) is list]
     target_length = len(input_items[0]["value"])
-    for item in input_items:
+    for item in input_items + output_items:
         item_length = len(item["value"])
         if item_length != target_length:
-            raise ValueError("The value lists for the items in the 'inputs' section of the json instructions do not all have the same length")
+            raise ValueError("The value lists used in json instructions do not all have the same length")
 
     # Check all the symbols are unique and are valid identifiers
     used_symbols = []
