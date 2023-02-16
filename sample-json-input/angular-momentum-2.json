@@ -13,9 +13,15 @@
       "units": "g m^2"
     },
     {
-      "symbol": "I_t",
+      "symbol": "I_t_st",
       "value": 2.76796787150000,
       "uncertainty": 0.00375155084230033,
+      "units": "g m^2"
+    },
+    {
+      "symbol": "I_t_al",
+      "value": 0.949031400500000,
+      "uncertainty": 0.00128916569566333,
       "units": "g m^2"
     }
   ],
@@ -25,7 +31,10 @@
       "value": [
         0,
         4.878,
-        4.157
+        4.157,
+        0,
+        1.705,
+        4.477
       ],
       "uncertainty": "abs(omega_error * omega_b)",
       "units": "rad/s"
@@ -35,7 +44,10 @@
       "value": [
         6.652,
         2.080,
-        -1.445
+        -1.445,
+        6.754,
+        6.597,
+        -3.168
       ],
       "uncertainty": "abs(omega_error * omega_t)",
       "units": "rad/s"
@@ -45,7 +57,10 @@
       "value": [
         3.324,
         3.456,
-        1.41
+        1.41,
+        1.727,
+        2.897,
+        2.513
       ],
       "uncertainty": "abs(omega_error * omega_f)",
       "units": "rad/s"
@@ -54,12 +69,26 @@
   "outputs": [
     {
       "symbol": "L_i",
-      "value": "I_b * omega_b + I_t * omega_t",
+      "value": [
+        "I_b * omega_b + I_t_st * omega_t", 
+        "I_b * omega_b + I_t_st * omega_t", 
+        "I_b * omega_b + I_t_st * omega_t", 
+        "I_b * omega_b + I_t_al * omega_t", 
+        "I_b * omega_b + I_t_al * omega_t",
+        "I_b * omega_b + I_t_al * omega_t" 
+      ],
       "units": "g m^2/s"
     },
     {
       "symbol": "L_f",
-      "value": "(I_b + I_t) * omega_f",
+      "value": [
+        "(I_b + I_t_st) * omega_f",
+        "(I_b + I_t_st) * omega_f",
+        "(I_b + I_t_st) * omega_f",
+        "(I_b + I_t_al) * omega_f",
+        "(I_b + I_t_al) * omega_f",
+        "(I_b + I_t_al) * omega_f"
+      ],
       "units": "g m^2/s"
     },
     {
