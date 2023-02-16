@@ -101,10 +101,13 @@ def calculate_output_values_and_uncertainty(instructions, item):
     Calculate the values and uncertainty for the output item.
     Note that the item object will be mutated in the process.
     """
-    formula = parse_expr(item["value"])
+    if type(item["value"]) is list:
+        formulas = [parse_expr(eqn) for eqn in item["value"]]
+    else:
+        formulas = [parse_expr(item["value"])] * get_row_count(instructions)
     value_list = []
     uncertainty_list = []
-    for i in range(get_row_count(instructions)):
+    for i, formula in enumerate(formulas):
         substitutions = get_substitutions(instructions, formula, i)
         uncertainty_substitutions = get_uncertainty_substitutions(instructions, formula, i)
         value = formula.evalf(subs=substitutions)
