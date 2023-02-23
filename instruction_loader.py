@@ -29,7 +29,7 @@ def validate_json_instructions(instructions):
                     "type": "object",
                     "properties": {
                         "symbol": {"type": "string"},
-                        "value": {"type": "number"},
+                        "value": {"type": ["number", "string"]},
                         "uncertainty": {"type": "number"},
                         "units": {"type": "string"},
                     },
