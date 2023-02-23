@@ -6,7 +6,7 @@ def open_json(file_name):
     """
     Open the json file at the location `file_name`.
     """
-    with open(file_name) as file:
+    with open(file_name, encoding="utf-8") as file:
         file_json = json.load(file)
     return file_json
 
