@@ -1,0 +1,32 @@
+{
+  "constants": [
+  ],
+  "inputs": [
+    {
+      "symbol": "R_1",
+      "value": [
+        326
+      ],
+      "uncertainty": "2",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_2",
+      "value": [
+        194
+      ],
+      "uncertainty": "2",
+      "units": "Ω"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "R_eq",
+      "value": "(1 / R_1 + 1 / R_2)**-1",
+      "units": "Ω"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
