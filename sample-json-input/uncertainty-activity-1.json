@@ -1,0 +1,40 @@
+{
+  "constants": [
+  ],
+  "inputs": [
+    {
+      "symbol": "q",
+      "value": [
+        3421
+      ],
+      "uncertainty": "1",
+      "units": "J"
+    },
+    {
+      "symbol": "m",
+      "value": [
+        0.2455
+      ],
+      "uncertainty": "0.0001",
+      "units": "kg"
+    },
+    {
+      "symbol": "Delta_T",
+      "value": [
+        7.35
+      ],
+      "uncertainty": "0.05",
+      "units": "K"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "c",
+      "value": "q / (m * Delta_T)",
+      "units": "J /(kg K)"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
