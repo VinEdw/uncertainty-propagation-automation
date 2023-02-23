@@ -1,0 +1,51 @@
+{
+  "constants": [
+    {
+      "symbol": "mu_0",
+      "value": "4 * pi * 10**-7",
+      "uncertainty": 0,
+      "units": "T m / A"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "i",
+      "value": [
+        0.0386
+      ],
+      "uncertainty": "0.0002",
+      "units": "A"
+    },
+    {
+      "symbol": "r",
+      "value": [
+        0.0456
+      ],
+      "uncertainty": "0.0001",
+      "units": "m"
+    },
+    {
+      "symbol": "theta_deg",
+      "value": [
+        42.0
+      ],
+      "uncertainty": "0.5",
+      "units": "°"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "theta_rad",
+      "value": "theta_deg * pi / 180",
+      "units": "rad"
+    },
+    {
+      "symbol": "B",
+      "value": "mu_0 * i / (2 * r * tan(theta_rad))",
+      "units": "T"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
