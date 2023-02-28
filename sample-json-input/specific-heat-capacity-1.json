@@ -1,0 +1,80 @@
+{
+  "constants": [
+    {
+      "symbol": "c_true",
+      "value": 4186,
+      "uncertainty": 0,
+      "units": "J / (kg ℃)"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "m_c",
+      "value": [
+        33.02
+      ],
+      "uncertainty": "0.01",
+      "units": "g"
+    },
+    {
+      "symbol": "m_cw",
+      "value": [
+        439.19
+      ],
+      "uncertainty": "0.01",
+      "units": "g"
+    },
+    {
+      "symbol": "T_i",
+      "value": [
+        20.2
+      ],
+      "uncertainty": "0.4",
+      "units": "℃"
+    },
+    {
+      "symbol": "H",
+      "value": [
+        293
+      ],
+      "uncertainty": "1",
+      "units": "W"
+    },
+    {
+      "symbol": "t",
+      "value": [
+        120.2
+      ],
+      "uncertainty": "0.2",
+      "units": "s"
+    },
+    {
+      "symbol": "T_f",
+      "value": [
+        38.5
+      ],
+      "uncertainty": "0.4",
+      "units": "℃"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "m_w",
+      "value": "(m_cw - m_c) / 1000",
+      "units": "kg"
+    },
+    {
+      "symbol": "c",
+      "value": "H * t / (m_w * (T_f - T_i))",
+      "units": "J / (kg ℃)"
+    },
+    {
+      "symbol": "D",
+      "value": "c - c_true",
+      "units": "J / (kg ℃)"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
