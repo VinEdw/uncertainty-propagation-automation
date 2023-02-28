@@ -3,7 +3,7 @@ from sympy.printing.latex import latex
 
 if __name__ == "__main__":
     # Get the symbol and formula input
-    symbol = input("Please input a symbol\n>>>")
+    symbol = input("Please input a symbol\n>>> ")
     expr_str = input("Please input a formula\n>>> ")
     expr = parse_expr(expr_str)
     # Print the LaTeX string for the expression
