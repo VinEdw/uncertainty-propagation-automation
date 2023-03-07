@@ -1,0 +1,83 @@
+{
+  "constants": [
+    {
+      "symbol": "c_w",
+      "value": 4190,
+      "uncertainty": 0,
+      "units": "J / (kg ℃)"
+    },
+    {
+      "symbol": "T_b",
+      "value": 100,
+      "uncertainty": 0,
+      "units": "℃"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "m_c",
+      "value": [
+        33.2,
+        33.7
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    },
+    {
+      "symbol": "m_cw",
+      "value": [
+        610.3,
+        525.2
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    },
+    {
+      "symbol": "T_iw",
+      "value": [
+        10.5,
+        10.2
+      ],
+      "uncertainty": "0.4",
+      "units": "℃"
+    },
+    {
+      "symbol": "T_f",
+      "value": [
+        32.2,
+        31.2
+      ],
+      "uncertainty": "0.4",
+      "units": "℃"
+    },
+    {
+      "symbol": "m_cws",
+      "value": [
+        633.4,
+        543.9
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "m_s",
+      "value": "m_cws - m_cw",
+      "units": "g"
+    },
+    {
+      "symbol": "m_w",
+      "value": "m_cw - m_c",
+      "units": "g"
+    },
+    {
+      "symbol": "L_v",
+      "value": "(m_w * c_w * (T_f - T_iw) + m_s * c_w * (T_f - T_b)) / (m_s)",
+      "units": "J / kg"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
