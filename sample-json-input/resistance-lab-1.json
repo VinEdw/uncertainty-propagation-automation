@@ -31,7 +31,7 @@
         2.00,
         20.00
       ],
-      "uncertainty": "0",
+      "uncertainty": "0.00000001",
       "units": "m"
     },
     {
@@ -45,7 +45,7 @@
         0.000320,
         0.000254
       ],
-      "uncertainty": "0",
+      "uncertainty": "0.00000001",
       "units": "m"
     },
     {
