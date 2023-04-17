@@ -140,7 +140,7 @@
     }
   ],
   "tables": [
-    ["V", "i", "R_VI"],
+    ["V", "i", "R_mr"],
     ["R_VI", "R_m", "R_th"],
     ["D_VI_th", "D_m_th", "D_VI_m"]
   ]
