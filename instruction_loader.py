@@ -44,7 +44,10 @@ def validate_json_instructions(instructions):
                     "properties": {
                         "symbol": {"type": "string"},
                         "value": {"type": "array", "items": {"type": "number"}},
-                        "uncertainty": {"type": "string"},
+                        "uncertainty": {
+                                            "type": ["string", "array"],
+                                            "items": {"type": "string"}
+                                        },
                         "units": {"type": "string"},
                     },
                     "required": ["symbol", "value", "uncertainty", "units"],
@@ -100,15 +103,26 @@ def validate_json_instructions(instructions):
                 used_symbols.append(symbol)
             else:
                 raise ValueError(f"The symbol '{symbol}' is used for more than one item.")
+    
+    # Turn each uncertainty value into a list, if it is not already
+    for item in instructions["inputs"]:
+        if type(item["uncertainty"]) is not list:
+            uncertainty_list = [item["uncertainty"] for i in item["value"]]
+            item["uncertainty"] = uncertainty_list
+        else:
+            if len(item["uncertainty"]) != len(item["value"]):
+                raise ValueError("The uncertainty lists do not have the right length.")
+                
 
     # Check all the uncertainty formulas do not reference non constant symbols besides themselves
     constant_symbol_list = [item["symbol"] for item in instructions["constants"]]
     for item in instructions["inputs"]:
         symbol = item["symbol"]
-        uncertainty_formula = parse_expr(item["uncertainty"])
-        for var in uncertainty_formula.free_symbols:
-            if str(var) not in (constant_symbol_list + [symbol]):
-                raise ValueError(f"The uncertainty formula for '{symbol}' references a non constant symbol besides itself.")
+        for uncertainty in item["uncertainty"]:
+            uncertainty_formula = parse_expr(uncertainty)
+            for var in uncertainty_formula.free_symbols:
+                if str(var) not in (constant_symbol_list + [symbol]):
+                    raise ValueError(f"The uncertainty formula for '{symbol}' references a non constant symbol besides itself.")
 
 def load_instructions(file_name):
     """

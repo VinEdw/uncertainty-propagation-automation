@@ -73,10 +73,10 @@ def calculate_input_uncertainty(instructions, item):
     Note that the item object will be mutated in the process.
     """
     symbol = item["symbol"]
-    uncertainty_formula = parse_expr(item["uncertainty"])
+    uncertainty_formulas = [parse_expr(formula) for formula in item["uncertainty"]]
     uncertainty_list = []
     substitutions = get_constant_substitutions(instructions)
-    for value in item["value"]:
+    for value, uncertainty_formula in zip(item["value"], uncertainty_formulas):
         substitutions[symbol] = value
         uncertainty = uncertainty_formula.evalf(subs=substitutions)
         uncertainty_list.append(uncertainty)
