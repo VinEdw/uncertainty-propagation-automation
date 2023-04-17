@@ -1,0 +1,147 @@
+{
+  "constants": [
+    {
+      "symbol": "rho_ns",
+      "value": 44e-8,
+      "uncertainty": 0,
+      "units": "Ω m"
+    },
+    {
+      "symbol": "rho_c",
+      "value": 1.72e-8,
+      "uncertainty": 0,
+      "units": "Ω m"
+    },
+    {
+      "symbol": "r",
+      "value": 0.1,
+      "uncertainty": 0.1,
+      "units": "Ω"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "L",
+      "value": [
+        0.40,
+        0.80,
+        1.20,
+        1.60,
+        2.00,
+        2.00,
+        20.00
+      ],
+      "uncertainty": "0",
+      "units": "m"
+    },
+    {
+      "symbol": "D",
+      "value": [
+        0.000254,
+        0.000254,
+        0.000254,
+        0.000254,
+        0.000254,
+        0.000320,
+        0.000254
+      ],
+      "uncertainty": "0",
+      "units": "m"
+    },
+    {
+      "symbol": "V",
+      "value": [
+        0.214,
+        0.400,
+        0.536,
+        0.662,
+        0.772,
+        0.538,
+        0.357
+      ],
+      "uncertainty": "0.001",
+      "units": "V"
+    },
+    {
+      "symbol": "i",
+      "value": [
+        0.05507,
+        0.04972,
+        0.04453,
+        0.04170,
+        0.03819,
+        0.04544,
+        0.05131
+      ],
+      "uncertainty": [
+        "0.00005",
+        "0.00001",
+        "0.00002",
+        "0.00001",
+        "0.00001",
+        "0.00001",
+        "0.00001"
+      ],
+      "units": "A"
+    },
+    {
+      "symbol": "R_mr",
+      "value": [
+        4.0,
+        8.3,
+        12.0,
+        15.9,
+        20.3,
+        11.7,
+        7.3
+      ],
+      "uncertainty": "0.1",
+      "units": "Ω"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "R_VI",
+      "value": "V / i",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_m",
+      "value": "R_mr - r",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_th",
+      "value": [
+        "rho_ns * L / (pi * (D / 2)**2)",
+        "rho_ns * L / (pi * (D / 2)**2)",
+        "rho_ns * L / (pi * (D / 2)**2)",
+        "rho_ns * L / (pi * (D / 2)**2)",
+        "rho_ns * L / (pi * (D / 2)**2)",
+        "rho_ns * L / (pi * (D / 2)**2)",
+        "rho_c * L / (pi * (D / 2)**2)"
+      ],
+      "units": "Ω"
+    },
+    {
+      "symbol": "D_VI_th",
+      "value": "R_VI - R_th",
+      "units": "Ω"
+    },
+    {
+      "symbol": "D_m_th",
+      "value": "R_m - R_th",
+      "units": "Ω"
+    },
+    {
+      "symbol": "D_VI_m",
+      "value": "R_VI - R_m",
+      "units": "Ω"
+    }
+  ],
+  "tables": [
+    ["V", "i", "R_VI"],
+    ["R_VI", "R_m", "R_th"],
+    ["D_VI_th", "D_m_th", "D_VI_m"]
+  ]
+}
