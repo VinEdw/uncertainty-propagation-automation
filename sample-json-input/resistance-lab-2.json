@@ -1,0 +1,38 @@
+{
+  "constants": [
+  ],
+  "inputs": [
+    {
+      "symbol": "V",
+      "value": [
+        0.744,
+        1.491,
+        2.257,
+        3.000
+      ],
+      "uncertainty": "0.001",
+      "units": "V"
+    },
+    {
+      "symbol": "i",
+      "value": [
+        0.0668,
+        0.1340,
+        0.2028,
+        0.2696
+      ],
+      "uncertainty": "0.0001",
+      "units": "A"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "R_VI",
+      "value": "V / i",
+      "units": "Ω"
+    }
+  ],
+  "tables": [
+    
+  ]
+}

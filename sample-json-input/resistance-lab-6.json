@@ -1,0 +1,54 @@
+{
+  "constants": [
+    {
+      "symbol": "r",
+      "value": 0.9,
+      "uncertainty": 0.1,
+      "units": "Ω"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "R_1r",
+      "value": [
+        12.3
+      ],
+      "uncertainty": "0.1",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_2r",
+      "value": [
+        30.6
+      ],
+      "uncertainty": "0.1",
+      "units": "Ω"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "R_1",
+      "value": "R_1r - r",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_2",
+      "value": "R_2r - r",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_ser",
+      "value": "R_1 + R_2",
+      "units": "Ω"
+    },
+    {
+      "symbol": "R_par",
+      "value": "(R_1**-1 + R_2**-1)**-1",
+      "units": "Ω"
+    }
+  ],
+  "tables": [
+    ["R_1", "R_2"],
+    ["R_ser", "R_par"]
+  ]
+}
