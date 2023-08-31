@@ -1,0 +1,149 @@
+{
+  "constants": [
+    {
+      "symbol": "g",
+      "value": 9.81,
+      "uncertainty": 0,
+      "units": "m/s^2"
+    },
+    {
+      "symbol": "rho_w",
+      "value": 1000,
+      "uncertainty": 0,
+      "units": "kg/m^3"
+    },
+    {
+      "symbol": "m_b",
+      "value": 215.5,
+      "uncertainty": 0.1,
+      "units": "g"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "rho_th",
+      "value": [
+        2700,
+        7800,
+        8600
+      ],
+      "uncertainty": "0",
+      "units": "kg/m^3"
+    },
+    {
+      "symbol": "m_b_w",
+      "value": [
+        617.1,
+        703.0,
+        701.9
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    },
+    {
+      "symbol": "m_c",
+      "value": [
+        18.26,
+        49.35,
+        53.12
+      ],
+      "uncertainty": "0.01",
+      "units": "g"
+    },
+    {
+      "symbol": "d",
+      "value": [
+        11.6,
+        11.4,
+        11.5
+      ],
+      "uncertainty": "0.1",
+      "units": "mm"
+    },
+    {
+      "symbol": "l",
+      "value": [
+        49.8,
+        50.0,
+        49.9
+      ],
+      "uncertainty": "0.1",
+      "units": "mm"
+    },
+    {
+      "symbol": "T",
+      "value": [
+        0.115,
+        0.407,
+        0.439
+      ],
+      "uncertainty": ["0.003", "0.002", "0.003"],
+      "units": "N"
+    },
+    {
+      "symbol": "m_x",
+      "value": [
+        623.5,
+        709.4,
+        708.5
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    },
+    {
+      "symbol": "m_p",
+      "value": [
+        37.3,
+        40.9,
+        39.7
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    },
+    {
+      "symbol": "m_p_w",
+      "value": [
+        42.8,
+        46.7,
+        45.9
+      ],
+      "uncertainty": "0.1",
+      "units": "g"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "B_th",
+      "value": "1 / 4 * rho_w * pi * d**2 * l * g / 1000**3",
+      "units": "N"
+    },
+    {
+      "symbol": "rho_c",
+      "value": "4 * m_c / (pi * d**2 * l) * 1000**3 / 1000",
+      "units": "kg/m^3"
+    },
+    {
+      "symbol": "B_T",
+      "value": "m_c * g / 1000 - T",
+      "units": "N"
+    },
+    {
+      "symbol": "B_n",
+      "value": "m_x * g / 1000 - m_b_w * g / 1000",
+      "units": "N"
+    },
+    {
+      "symbol": "B_d",
+      "value": "(m_p_w - m_p) * g / 1000",
+      "units": "N"
+    }
+  ],
+  "tables": [
+    ["d", "l", "B_th"],
+    ["m_c", "rho_c", "rho_th"],
+    ["T", "B_T"],
+    ["m_b_w", "m_x", "B_n"],
+    ["m_p", "m_p_w", "B_d"],
+    ["B_th", "B_T", "B_n", "B_d"]
+  ]
+}
