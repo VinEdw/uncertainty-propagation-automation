@@ -1,0 +1,78 @@
+{
+  "constants": [
+    {
+      "symbol": "m_str",
+      "value": 3.61,
+      "uncertainty": 0.01,
+      "units": "g"
+    },
+    {
+      "symbol": "L_tot",
+      "value": 294,
+      "uncertainty": 2,
+      "units": "cm"
+    },
+    {
+      "symbol": "m_h",
+      "value": 200.07,
+      "uncertainty": 0.01,
+      "units": "g"
+    },
+    {
+      "symbol": "g",
+      "value": 9.81,
+      "uncertainty": 0,
+      "units": "m/s^2"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "f",
+      "value": [
+        22.6,
+        33.6,
+        44.8,
+        57.5
+      ],
+      "uncertainty": "0.1",
+      "units": "Hz"
+    },
+    {
+      "symbol": "λ",
+      "value": [
+        178.5,
+        118,
+        88,
+        71
+      ],
+      "uncertainty": ["0.1", "1", "1", "1"],
+      "units": "cm"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "mu",
+      "value": "m_str / L_tot / 1000 * 100",
+      "units": "kg/m"
+    },
+    {
+      "symbol": "F_T",
+      "value": "m_h * g / 1000",
+      "units": "N"
+    },
+    {
+      "symbol": "v_th",
+      "value": "(F_T / mu)**0.5",
+      "units": "m/s"
+    },
+    {
+      "symbol": "v_ex",
+      "value": "λ * f / 100",
+      "units": "m/s"
+    }
+  ],
+  "tables": [
+    ["mu", "F_T"],
+    ["f", "λ", "v_th", "v_ex"]
+  ]
+}
