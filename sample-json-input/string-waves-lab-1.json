@@ -40,12 +40,12 @@
     {
       "symbol": "λ",
       "value": [
-        178.5,
+        179,
         118,
         88,
         71
       ],
-      "uncertainty": ["0.1", "1", "1", "1"],
+      "uncertainty": "1",
       "units": "cm"
     }
   ],
@@ -69,10 +69,15 @@
       "symbol": "v_ex",
       "value": "λ * f / 100",
       "units": "m/s"
+    },
+    {
+      "symbol": "v_diff",
+      "value": "v_ex - v_th",
+      "units": "m/s"
     }
   ],
   "tables": [
     ["mu", "F_T"],
-    ["f", "λ", "v_th", "v_ex"]
+    ["f", "λ", "v_th", "v_ex", "v_diff"]
   ]
 }
