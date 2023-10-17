@@ -1,0 +1,59 @@
+{
+  "constants": [
+    {
+      "symbol": "a_th",
+      "value": 0.0001,
+      "uncertainty": 0,
+      "units": "m"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "x",
+      "value": [
+        1.750
+      ],
+      "uncertainty": "0.001",
+      "units": "m"
+    },
+    {
+      "symbol": "y",
+      "value": [
+        0.0545
+      ],
+      "uncertainty": "0.0005",
+      "units": "m"
+    },
+    {
+      "symbol": "m",
+      "value": [
+        6
+      ],
+      "uncertainty": "0",
+      "units": ""
+    },
+    {
+      "symbol": "wavelength",
+      "value": [
+        532
+      ],
+      "uncertainty": "10",
+      "units": "nm"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "a_ex",
+      "value": "m * wavelength * x / y / 10**9",
+      "units": "m"
+    },
+    {
+      "symbol": "a_diff",
+      "value": "a_ex - a_th",
+      "units": "m"
+    }
+  ],
+  "tables": [
+    
+  ]
+}

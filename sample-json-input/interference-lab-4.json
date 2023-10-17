@@ -1,0 +1,59 @@
+{
+  "constants": [
+    {
+      "symbol": "N_th",
+      "value": 1000,
+      "uncertainty": 0,
+      "units": "mm^-1"
+    },
+    {
+      "symbol": "x",
+      "value": 0.100,
+      "uncertainty": 0.005,
+      "units": "m"
+    },
+    {
+      "symbol": "m",
+      "value": 1,
+      "uncertainty": 0,
+      "units": ""
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "y",
+      "value": [
+        0.087,
+        0.065,
+        0.044
+      ],
+      "uncertainty": "0.001",
+      "units": "m"
+    },
+    {
+      "symbol": "wavelength",
+      "value": [
+        650,
+        532,
+        405
+      ],
+      "uncertainty": "10",
+      "units": "nm"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "N_ex",
+      "value": "sin(atan(y / x)) / (m * wavelength * 10**-9) / 1000",
+      "units": "mm^-1"
+    },
+    {
+      "symbol": "N_diff",
+      "value": "N_ex - N_th",
+      "units": "mm^-1"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
