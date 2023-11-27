@@ -1,0 +1,71 @@
+{
+  "constants": [
+    {
+      "symbol": "c_th",
+      "value": 3.00e8,
+      "uncertainty": 0,
+      "units": "m/s"
+    },
+    {
+      "symbol": "n",
+      "value": 1.49,
+      "uncertainty": 0,
+      "units": ""
+    },
+    {
+      "symbol": "m",
+      "value": 0.57,
+      "uncertainty": 0.01,
+      "units": "g"
+    },
+    {
+      "symbol": "l",
+      "value": 0.1488,
+      "uncertainty": 0.0002,
+      "units": "m"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "M",
+      "value": [
+        75.10
+      ],
+      "uncertainty": "0.01",
+      "units": "g"
+    },
+    {
+      "symbol": "t",
+      "value": [
+        99.85
+      ],
+      "uncertainty": "1.53",
+      "units": "ns"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "L",
+      "value": "M * l / m",
+      "units": "m"
+    },
+    {
+      "symbol": "v",
+      "value": "L / t * 10**9",
+      "units": "m/s"
+    },
+    {
+      "symbol": "c",
+      "value": "v * n",
+      "units": "m/s"
+    },
+    {
+      "symbol": "c_diff",
+      "value": "c - c_th",
+      "units": "m/s"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
