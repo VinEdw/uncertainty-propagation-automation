@@ -1,0 +1,77 @@
+{
+  "constants": [
+    {
+      "symbol": "h",
+      "value": 6.626e-34,
+      "uncertainty": 0,
+      "units": "Js"
+    },
+    {
+      "symbol": "c",
+      "value": 3.00e+8,
+      "uncertainty": 0,
+      "units": "m/s"
+    },
+    {
+      "symbol": "e",
+      "value": 1.602e-19,
+      "uncertainty": 0,
+      "units": "C"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "wavelength",
+      "value": [
+        449,
+        632,
+        659,
+        591,
+        583,
+        535,
+        454
+      ],
+      "uncertainty": "1",
+      "units": "nm"
+    },
+    {
+      "symbol": "V_ex",
+      "value": [
+        2.40,
+        1.59,
+        1.48,
+        1.65,
+        1.73,
+        2.03,
+        2.39
+      ],
+      "uncertainty": "0.01",
+      "units": "V"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "V_th",
+      "value": "h * c / (e * wavelength) * 10**9",
+      "units": "V"
+    },
+    {
+      "symbol": "h_ex",
+      "value": "e * V_ex * wavelength / (c * 10**9)",
+      "units": "Js"
+    },
+    {
+      "symbol": "V_diff",
+      "value": "V_ex - V_th",
+      "units": "V"
+    },
+    {
+      "symbol": "h_diff",
+      "value": "h_ex - h",
+      "units": "Js"
+    }
+  ],
+  "tables": [
+    
+  ]
+}
