@@ -1,0 +1,224 @@
+{
+  "constants": [
+    {
+      "symbol": "v_error",
+      "value": 0.0161778,
+      "uncertainty": 0,
+      "units": "m/s"
+    }
+  ],
+  "inputs": [
+    {
+      "symbol": "m_B",
+      "value": [
+        0.5827,
+        0.3254,
+        0.3254,
+        0.3254,
+        0.5827,
+        0.3254,
+        0.3254,
+        0.3254
+      ],
+      "uncertainty": "0.0001",
+      "units": "kg"
+    },
+    {
+      "symbol": "m_G",
+      "value": [
+        0.5865,
+        1.0780,
+        1.0780,
+        1.0780,
+        0.5865,
+        1.0780,
+        1.0780,
+        1.0780
+      ],
+      "uncertainty": "0.0001",
+      "units": "kg"
+    },
+    {
+      "symbol": "v_B",
+      "value": [
+        -0.3718,
+        -0.0006,
+        -0.2125,
+        -0.8400,
+        -0.3763,
+        0.0007,
+        -0.2704,
+        0.1784
+      ],
+      "uncertainty": "v_error",
+      "units": "m/s"
+    },
+    {
+      "symbol": "v_G",
+      "value": [
+        0.3512,
+        0.2726,
+        0.2016,
+        0.3243,
+        0.3095,
+        0.3143,
+        0.2904,
+        0.4026
+      ],
+      "uncertainty": "v_error",
+      "units": "m/s"
+    },
+    {
+      "symbol": "u_B",
+      "value": [
+        -0.0001,
+        0.2019,
+        0.1052,
+        0.2542,
+        0.2788,
+        0.4590,
+        0.4763,
+        0.4939
+      ],
+      "uncertainty": "v_error",
+      "units": "m/s"
+    },
+    {
+      "symbol": "u_G",
+      "value": [
+        -0.0003,
+        0.2020,
+        0.1044,
+        0.2544,
+        0.3372,
+        0.1543,
+        0.0474,
+        0.2818
+      ],
+      "uncertainty": "v_error",
+      "units": "m/s"
+    }
+  ],
+  "outputs": [
+    {
+      "symbol": "p_Bi",
+      "value": "m_B * v_B",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "p_Gi",
+      "value": "m_G * v_G",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "p_Bf",
+      "value": "m_B * u_B",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "p_Gf",
+      "value": "m_G * u_G",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "P_i",
+      "value": "p_Bi + p_Gf",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "P_f",
+      "value": "p_Bf + p_Gf",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "Delta_P",
+      "value": "m_B * (u_B - v_B) + m_G * (u_G - v_G)",
+      "units": "kg m/s"
+    },
+    {
+      "symbol": "K_Bi",
+      "value": "m_B * v_B**2 / 2",
+      "units": "J"
+    },
+    {
+      "symbol": "K_Bf",
+      "value": "m_B * u_B**2 / 2",
+      "units": "J"
+    },
+    {
+      "symbol": "K_Gi",
+      "value": "m_G * v_G**2 / 2",
+      "units": "J"
+    },
+    {
+      "symbol": "K_Gf",
+      "value": "m_G * u_G**2 / 2",
+      "units": "J"
+    },
+    {
+      "symbol": "K_i",
+      "value": "K_Bi + K_Gi",
+      "units": "J"
+    },
+    {
+      "symbol": "K_f",
+      "value": "K_Bf + K_Gf",
+      "units": "J"
+    },
+    {
+      "symbol": "Delta_K",
+      "value": "m_B * (u_B**2 - v_B**2) / 2 + m_G * (u_G**2 - v_G**2) / 2",
+      "units": "J"
+    },
+    {
+      "symbol": "V_cmi",
+      "value": "(m_B * v_B + m_G * v_G) / (m_B + m_G)",
+      "units": "m/s"
+    },
+    {
+      "symbol": "V_cmf",
+      "value": "(m_B * u_B + m_G * u_G) / (m_B + m_G)",
+      "units": "m/s"
+    },
+    {
+      "symbol": "Delta_V_cm",
+      "value": "(m_B * (u_B - v_B) + m_G * (u_G - u_B)) / (m_B + m_G)",
+      "units": "m/s"
+    }
+  ],
+  "tables": [
+    [
+      "m_B",
+      "v_B",
+      "u_B",
+      "p_Bi",
+      "p_Bf",
+      "K_Bi",
+      "K_Bf"
+    ],
+    [
+      "m_G",
+      "v_G",
+      "u_G",
+      "p_Gi",
+      "p_Gf",
+      "K_Gi",
+      "K_Gf"
+    ],
+    [
+      "P_i",
+      "P_f",
+      "Delta_P"
+    ],
+    [
+      "K_i",
+      "K_f",
+      "Delta_K"
+    ],
+    [
+      "V_cmi",
+      "V_cmf",
+      "Delta_V_cm"
+    ]
+  ]
+}
